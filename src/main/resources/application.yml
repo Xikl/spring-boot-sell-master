@@ -1,0 +1,31 @@
+spring:
+  # 数据库配置
+  datasource:
+#      url: jdbc:mysql://192.168.0.116:3306/sell?characterEncoding=utf-8&uesSSL=false
+      url: jdbc:mysql://localhost:3306/spring-boot-sell-master?characterEncoding=utf-8&uesSSL=false
+      username: root
+      password: zwz520
+      driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    # 打印sql语句
+    show-sql: true
+  # json数据中为空的过滤掉
+  jackson:
+    default-property-inclusion: non_null
+  freemarker:
+    suffix: .html
+# 将freemarker的后缀改为 .html
+#    # 自动
+#    hibernate:
+#      ddl-auto: update
+server:
+  context-path: /sell
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#    file: E:/springLog/Spring-Sell-Log/sell.log
+#    level: debug
+
+wechat:
+  mpAppId: wxc344e6a900cc0222
+  mpAppSecret: 3d43abf6e2ddb59f51620faf7bc1798d
