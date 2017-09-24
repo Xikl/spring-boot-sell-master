@@ -111,6 +111,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO findOne(String orderId) {
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
         if(orderMaster == null){
+            log.error("【订单查询】 查不到该订单， orderId={}", orderId);
             throw new SellException(ResultEnums.ORDER_NOT_EXIST);
         }
         List<OrderDetail> orderDetailList = orderDetailRepository.findByOrderId(orderId);
