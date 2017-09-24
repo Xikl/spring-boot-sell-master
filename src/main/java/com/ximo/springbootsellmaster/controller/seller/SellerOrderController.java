@@ -38,6 +38,8 @@ public class SellerOrderController {
         PageRequest pageRequest = new PageRequest(page - 1, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
         model.addAttribute("orderDTOPage", orderDTOPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("size", size);
         return "order/list";
     }
 

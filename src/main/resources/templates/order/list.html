@@ -9,6 +9,7 @@
 
     <div class="container">
         <div class="row clearfix">
+            <!--表格-->
             <div class="col-md-12 column">
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -83,27 +84,41 @@
             <!--分页-->
             <div class="col-md-12 column">
                 <ul class="pagination pull-right">
-                    <li>
-                        <a href="#">上一页</a>
-                    </li>
-                    <li>
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">下一页</a>
-                    </li>
+                    <!--定义分页总数-->
+                    <#assign totalPage = orderDTOPage.getTotalPages()/>
+                    <!--为第一页的时候-->
+                    <#if currentPage lte 1>
+                        <li class="hidden">
+                            <a href="#">上一页</a>
+                        </li>
+                        <!--不为第一页的时候-->
+                        <#else>
+                            <li>
+                                <!--获得后台传过来的CurrentPage和Size对象-->
+                                <a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a>
+                            </li>
+                    </#if>
+                    <!--开始循环分页-->
+                    <#list 1..totalPage as index>
+                        <#if currentPage == index>
+                            <li class="disabled">
+                                <a href="#">${index}</a>
+                            </li>
+                            <#else>
+                            <li>
+                                <a href="/sell/seller/order/list?page=${index}&size=${size}">${index}</a>
+                            </li>
+                        </#if>
+                    </#list>
+                    <#if currentPage gte totalPage>
+                        <li class="hidden">
+                            <a href="#">下一页</a>
+                        </li>
+                        <#else>
+                            <li>
+                                <a href="/sell/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a>
+                            </li>
+                    </#if>
                 </ul>
             </div>
         </div>
