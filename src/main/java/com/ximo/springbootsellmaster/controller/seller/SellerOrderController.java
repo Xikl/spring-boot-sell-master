@@ -2,6 +2,7 @@ package com.ximo.springbootsellmaster.controller.seller;
 
 import com.ximo.springbootsellmaster.dto.OrderDTO;
 import com.ximo.springbootsellmaster.enums.ResultEnums;
+import com.ximo.springbootsellmaster.exception.SellException;
 import com.ximo.springbootsellmaster.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class SellerOrderController {
 
     /**
      * 订单列表
+     *
      * @param page 第几页 从第一页开始
      * @param size 每页显示多少数据
      * @return
@@ -35,7 +37,7 @@ public class SellerOrderController {
     @GetMapping("/list")
     public String list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size,
-                       Model model){
+                       Model model) {
         PageRequest pageRequest = new PageRequest(page - 1, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
         model.addAttribute("orderDTOPage", orderDTOPage);
@@ -46,26 +48,26 @@ public class SellerOrderController {
 
     /**
      * 卖家取消订单的操作
+     *
      * @param orderId
      * @return
      */
     @GetMapping("/cancel")
     public String cancel(@RequestParam("orderId") String orderId,
-                         Model model){
+                         Model model) {
         //查找该orderDTO
-        OrderDTO orderDTO = orderService.findOne(orderId);
-        if(orderDTO == null){
+        OrderDTO orderDTO;
+        try {
+            orderDTO = orderService.findOne(orderId);
+        } catch (SellException e) {
             log.error("【买家取消订单】 查询不到该订单");
             model.addAttribute("msg", ResultEnums.ORDER_NOT_EXIST.getMsg());
-            model.addAttribute("url", "sell/seller/order/list");
+            model.addAttribute("url", "/sell/seller/order/list");
             return "common/error";
         }
         orderService.cancel(orderDTO);
         return "sth";
     }
-
-
-
 
 
 }
