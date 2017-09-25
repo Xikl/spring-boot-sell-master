@@ -66,10 +66,12 @@ public class SellerOrderController {
             return "common/error";
         }
         //成功
-        model.addAttribute("msg", ResultEnums.SUCCESS.getMsg());
+        model.addAttribute("msg", ResultEnums.ORDER_CANCEL_SUCCESS.getMsg());
         model.addAttribute("url", "/sell/seller/order/list");
         return "common/success";
     }
+
+
 
 
 }

@@ -23,7 +23,7 @@ public enum ResultEnums {
     CART_EMPTY(18, "购物车不能为空"),
     ORDER_OWNER_ERROR(19, "该订单不属于该用户"),
     WX_MP_ERROR(20, "微信公众账号方面错误"),
-
+    ORDER_CANCEL_SUCCESS(21, "订单取消成功"),
     ;
 
     private Integer code;
