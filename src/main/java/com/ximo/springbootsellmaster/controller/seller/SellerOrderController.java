@@ -67,9 +67,10 @@ public class SellerOrderController {
             return ModelUtil.error(model, e);
         }
         //成功
-        model.addAttribute("msg", ResultEnums.ORDER_CANCEL_SUCCESS.getMsg());
-        model.addAttribute("url", "/sell/seller/order/list");
-        return "common/success";
+//        model.addAttribute("msg", ResultEnums.ORDER_CANCEL_SUCCESS.getMsg());
+//        model.addAttribute("url", "/sell/seller/order/list");
+//        return "common/success";
+        return ModelUtil.success(model, ResultEnums.ORDER_CANCEL_SUCCESS.getMsg());
     }
 
     /**
@@ -91,6 +92,19 @@ public class SellerOrderController {
         }
         model.addAttribute("orderDTO", orderDTO);
         return "order/detail";
+    }
+
+    @GetMapping("/finish/{orderId}")
+    public String finish(@PathVariable("orderId") String orderId,
+                         Model model){
+        try {
+            OrderDTO orderDTO = orderService.findOne(orderId);
+            orderService.finish(orderDTO);
+        } catch (SellException e) {
+            log.error("【买家完结订单详情】 发生异常{}", e);
+            return ModelUtil.error(model, e);
+        }
+        return ModelUtil.success(model, ResultEnums.ORDER_FINISH_SUCCESS.getMsg());
     }
 
 
