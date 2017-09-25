@@ -94,6 +94,12 @@ public class SellerOrderController {
         return "order/detail";
     }
 
+    /**
+     * 完结订单
+     * @param orderId
+     * @param model
+     * @return
+     */
     @GetMapping("/finish/{orderId}")
     public String finish(@PathVariable("orderId") String orderId,
                          Model model){
