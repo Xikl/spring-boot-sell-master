@@ -75,7 +75,7 @@
                                class="btn btn-xs btn-success">详情</a>
                         </td>
                         <td>
-                            <#if orderDTO.getOrderStatusEnums().msg != "已取消">
+                            <#if orderDTO.getOrderStatusEnums().msg == "新订单">
                                 <a href="/sell/seller/order/cancel/${orderDTO.orderId}" type="button"
                                    class="btn btn-xs btn-warning">取消</a>
                             </#if>
