@@ -54,8 +54,8 @@ public class SellerOrderController {
      * @param orderId
      * @return
      */
-    @GetMapping("/cancel")
-    public String cancel(@RequestParam("orderId") String orderId,
+    @GetMapping("/cancel/{orderId}")
+    public String cancel(@PathVariable("orderId") String orderId,
                          Model model) {
         //查找该orderDTO
         try {

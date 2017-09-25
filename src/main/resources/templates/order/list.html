@@ -71,11 +71,13 @@
                             ${orderDTO.createTime}
                         </td>
                         <td>
-                            详情
+                            <a href="/sell/seller/order/detail/${orderDTO.orderId}" type="button"
+                               class="btn btn-xs btn-success">详情</a>
                         </td>
                         <td>
                             <#if orderDTO.getOrderStatusEnums().msg != "已取消">
-                                <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
+                                <a href="/sell/seller/order/cancel/${orderDTO.orderId}" type="button"
+                                   class="btn btn-xs btn-warning">取消</a>
                             </#if>
                         </td>
                     </tr>
