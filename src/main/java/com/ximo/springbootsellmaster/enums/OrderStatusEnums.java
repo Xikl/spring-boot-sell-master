@@ -11,8 +11,8 @@ import lombok.Getter;
 public enum  OrderStatusEnums implements CodeEnums<Integer>{
 
     NEW(0, "新订单"),
-    FINISHED(1, "完结"),
-    CANCEL(2, "取消")
+    FINISHED(1, "已完结"),
+    CANCEL(2, "已取消")
     ;
 
     private Integer code;

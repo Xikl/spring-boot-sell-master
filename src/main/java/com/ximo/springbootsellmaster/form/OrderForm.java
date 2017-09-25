@@ -31,8 +31,4 @@ public class OrderForm {
     @NotEmpty(message = "购物车不能为空")
     private String items;
 
-
-
-
-
 }

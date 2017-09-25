@@ -56,17 +56,19 @@ public class SellerOrderController {
     public String cancel(@RequestParam("orderId") String orderId,
                          Model model) {
         //查找该orderDTO
-        OrderDTO orderDTO;
         try {
-            orderDTO = orderService.findOne(orderId);
+            OrderDTO orderDTO = orderService.findOne(orderId);
+            orderService.cancel(orderDTO);
         } catch (SellException e) {
-            log.error("【买家取消订单】 查询不到该订单");
-            model.addAttribute("msg", ResultEnums.ORDER_NOT_EXIST.getMsg());
+            log.error("【买家取消订单】 发生异常{}", e);
+            model.addAttribute("msg", e.getMessage());
             model.addAttribute("url", "/sell/seller/order/list");
             return "common/error";
         }
-        orderService.cancel(orderDTO);
-        return "sth";
+        //成功
+        model.addAttribute("msg", ResultEnums.SUCCESS.getMsg());
+        model.addAttribute("url", "/sell/seller/order/list");
+        return "common/success";
     }
 
 
