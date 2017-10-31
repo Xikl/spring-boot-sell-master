@@ -13,7 +13,7 @@ spring:
   jackson:
     default-property-inclusion: non_null
   freemarker:
-    suffix: .html
+    suffix: .ftl
 # 将freemarker的后缀改为 .html
 #    # 自动
 #    hibernate:
