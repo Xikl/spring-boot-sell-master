@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>买家商品列表</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-</head>
+<#include "../common/header.ftl">
 <body>
 
     <div id="wrapper" class="toggled">
@@ -13,7 +8,7 @@
         <#include "../common/nav.ftl">
         <!--主要内容区域-->
         <div id="page-content-wrapper">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row clearfix">
                     <!--表格-->
                     <div class="col-md-12 column">
