@@ -1,5 +1,8 @@
 package com.ximo.springbootsellmaster.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ximo.springbootsellmaster.enums.ProductStatusEnums;
+import com.ximo.springbootsellmaster.util.EnumUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,4 +55,11 @@ public class ProductInfo {
 
     /** 更新时间*/
     private Date updateTime;
+
+    /** 根据状态码获得他的描述*/
+    @JsonIgnore
+    public ProductStatusEnums getProductStatusEnums(){
+        return EnumUtil.getByCode(productStatus, ProductStatusEnums.class);
+    }
+
 }
