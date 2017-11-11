@@ -97,4 +97,42 @@ public class ProductInfoServiceImpl implements ProductInfoService {
             productInfoRepository.save(productInfo);
         }
     }
+
+    /**
+     * 上架
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductInfo onSale(String productId) {
+        ProductInfo productInfo = productInfoRepository.findOne(productId);
+        if(productInfo == null){
+            throw new SellException(ResultEnums.PRODUCT_NOT_EXIST);
+        }
+        if(productInfo.getProductStatusEnums() == ProductStatusEnums.UP){
+            throw new SellException(ResultEnums.PRODUCT_STATUS_ERROR);
+        }
+        //执行更新
+        productInfo.setProductStatus(ProductStatusEnums.UP.getCode());
+        return productInfoRepository.save(productInfo);
+    }
+
+    /**
+     * 下架
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductInfo offSale(String productId) {
+        ProductInfo productInfo = productInfoRepository.findOne(productId);
+        if(productInfo == null){
+            throw new SellException(ResultEnums.PRODUCT_NOT_EXIST);
+        }
+        if(productInfo.getProductStatusEnums() == ProductStatusEnums.DOWN){
+            throw new SellException(ResultEnums.PRODUCT_STATUS_ERROR);
+        }
+        //执行更新
+        productInfo.setProductStatus(ProductStatusEnums.DOWN.getCode());
+        return productInfoRepository.save(productInfo);
+    }
 }

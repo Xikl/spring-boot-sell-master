@@ -25,6 +25,7 @@ public enum ResultEnums {
     WX_MP_ERROR(20, "微信公众账号方面错误"),
     ORDER_CANCEL_SUCCESS(21, "订单取消成功"),
     ORDER_FINISH_SUCCESS(22, "订单完结成功"),
+    PRODUCT_STATUS_ERROR(23, "商品订单信息错误"),
     ;
 
     private Integer code;
