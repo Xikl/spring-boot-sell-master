@@ -1,7 +1,10 @@
 package com.ximo.springbootsellmaster.controller.seller;
 
 import com.ximo.springbootsellmaster.domain.ProductInfo;
+import com.ximo.springbootsellmaster.enums.ResultEnums;
+import com.ximo.springbootsellmaster.exception.SellException;
 import com.ximo.springbootsellmaster.service.ProductInfoService;
+import com.ximo.springbootsellmaster.util.ModelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,6 +48,36 @@ public class SellerProductController {
         return new ModelAndView("product/list", map);
     }
 
+    @RequestMapping("/on_sale")
+    public ModelAndView onSale(@RequestParam("productId") String productId,
+                               Map<String, Object> map){
+        try {
+            productInfoService.onSale(productId);
+        } catch (SellException e) {
+            /*失败的时候*/
+            return ModelUtil.error(map, e.getMessage());
+        }
+        /*成功的时候*/
+        return ModelUtil.success(map, ResultEnums.PRODUCT_ON_SALE_SUCCESS.getMsg());
+    }
 
+    /**
+     * 下架
+     * @param productId
+     * @param map
+     * @return
+     */
+    @RequestMapping("/off_sale")
+    public ModelAndView offSale(@RequestParam("productId") String productId,
+                               Map<String, Object> map){
+        try {
+            productInfoService.offSale(productId);
+        } catch (SellException e) {
+            /*失败的时候*/
+           return ModelUtil.error(map, e.getMessage());
+        }
+        /*成功的时候*/
+        return ModelUtil.success(map, ResultEnums.PRODUCT_OFF_SALE_SUCCESS.getMsg());
+    }
 
 }

@@ -66,10 +66,6 @@ public class SellerOrderController {
             //采用自己封装的util类
             return ModelUtil.error(model, e);
         }
-        //成功
-//        model.addAttribute("msg", ResultEnums.ORDER_CANCEL_SUCCESS.getMsg());
-//        model.addAttribute("url", "/sell/seller/order/list");
-//        return "common/success";
         return ModelUtil.success(model, ResultEnums.ORDER_CANCEL_SUCCESS.getMsg());
     }
 
