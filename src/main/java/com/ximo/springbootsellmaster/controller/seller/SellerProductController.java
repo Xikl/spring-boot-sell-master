@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,7 +50,7 @@ public class SellerProductController {
     }
 
     @RequestMapping("/on_sell")
-    public ModelAndView onSale(@RequestParam("productId") String productId,
+    public ModelAndView onSale(@PathVariable("productId") String productId,
                                Map<String, Object> map){
         try {
             productInfoService.onSale(productId);
@@ -68,7 +69,7 @@ public class SellerProductController {
      * @return
      */
     @RequestMapping("/off_sell")
-    public ModelAndView offSale(@RequestParam("productId") String productId,
+    public ModelAndView offSale(@PathVariable("productId") String productId,
                                Map<String, Object> map){
         try {
             productInfoService.offSale(productId);
