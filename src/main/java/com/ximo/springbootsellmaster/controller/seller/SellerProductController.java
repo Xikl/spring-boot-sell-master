@@ -48,7 +48,7 @@ public class SellerProductController {
         return new ModelAndView("product/list", map);
     }
 
-    @RequestMapping("/on_sale")
+    @RequestMapping("/on_sell")
     public ModelAndView onSale(@RequestParam("productId") String productId,
                                Map<String, Object> map){
         try {
@@ -67,7 +67,7 @@ public class SellerProductController {
      * @param map
      * @return
      */
-    @RequestMapping("/off_sale")
+    @RequestMapping("/off_sell")
     public ModelAndView offSale(@RequestParam("productId") String productId,
                                Map<String, Object> map){
         try {
