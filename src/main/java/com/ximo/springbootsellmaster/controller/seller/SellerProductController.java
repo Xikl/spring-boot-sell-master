@@ -7,6 +7,7 @@ import com.ximo.springbootsellmaster.exception.SellException;
 import com.ximo.springbootsellmaster.form.ProductForm;
 import com.ximo.springbootsellmaster.service.ProductCategoryService;
 import com.ximo.springbootsellmaster.service.ProductInfoService;
+import com.ximo.springbootsellmaster.util.KeyUtil;
 import com.ximo.springbootsellmaster.util.ModelUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,10 +111,18 @@ public class SellerProductController {
             return ModelUtil.errorIndex(map, bindingResult.getFieldError().getDefaultMessage());
         }
 
+        ProductInfo productInfo;
         try {
-            /*信息正确，bean的拷贝*/
-            //todo 新增的情况怎么办
-            ProductInfo productInfo = productInfoService.findOne(productForm.getProductId());
+            String productId = productForm.getProductId();
+            /*id不为空的时候 ，表示为修改*/
+            if (!StringUtils.isEmpty(productId)){
+                productInfo = productInfoService.findOne(productId);
+            }else{
+                /*id为空， 表示为新增*/
+                productInfo = new ProductInfo();
+                productForm.setProductId(KeyUtil.generateUniqueKey());
+            }
+            /*值的拷贝*/
             BeanUtils.copyProperties(productForm, productInfo);
             /*保存*/
             productInfoService.save(productInfo);
