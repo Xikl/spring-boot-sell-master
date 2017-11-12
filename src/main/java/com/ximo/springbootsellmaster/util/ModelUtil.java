@@ -15,6 +15,7 @@ public class ModelUtil{
 
     private static final String ORDER_DEFAULT_URL = "/sell/seller/order/list";
     private static final String PRODUCT_DEFAULT_URL = "/sell/seller/product/list";
+    private static final String PRODUCT_INDEX_URL = "/sell/seller/product/index";
     private static final String ERROR_PAGE = "common/error";
     private static final String SUCCESS_PAGE = "common/success";
 
@@ -24,7 +25,7 @@ public class ModelUtil{
      * @param e
      */
     public static String error(Model model, SellException e){
-        defaultAdd(model, e.getMessage());
+        defaultAdd(model, e.getMessage(), ORDER_DEFAULT_URL);
         return ERROR_PAGE;
     }
 
@@ -35,7 +36,7 @@ public class ModelUtil{
      * @return
      */
     public static String success(Model model, String msg){
-        defaultAdd(model, msg);
+        defaultAdd(model, msg, ORDER_DEFAULT_URL);
         return SUCCESS_PAGE;
     }
 
@@ -44,9 +45,9 @@ public class ModelUtil{
      * @param model
      * @param msg
      */
-    private static void defaultAdd(Model model, String msg){
+    private static void defaultAdd(Model model, String msg, String url){
         model.addAttribute("msg", msg);
-        model.addAttribute("url", ORDER_DEFAULT_URL);
+        model.addAttribute("url", url);
     }
 
     /**
@@ -54,9 +55,9 @@ public class ModelUtil{
      * @param map
      * @param msg
      */
-    private static void defaultAdd(Map<String, Object> map, String msg){
+    private static void defaultAdd(Map<String, Object> map, String msg, String url){
         map.put("msg", msg);
-        map.put("url", PRODUCT_DEFAULT_URL);
+        map.put("url", url);
     }
 
     /**
@@ -66,7 +67,7 @@ public class ModelUtil{
      * @return
      */
     public static ModelAndView success(Map<String, Object> map, String msg){
-        defaultAdd(map, msg);
+        defaultAdd(map, msg, PRODUCT_DEFAULT_URL);
         return new ModelAndView(SUCCESS_PAGE, map);
     }
 
@@ -77,8 +78,31 @@ public class ModelUtil{
      * @return
      */
     public static ModelAndView error(Map<String, Object> map, String msg){
-        defaultAdd(map, msg);
+        defaultAdd(map, msg, PRODUCT_DEFAULT_URL);
         return new ModelAndView(ERROR_PAGE, map);
+    }
+
+    /**
+     * 添加修改 产品 失败方法
+     * @param map
+     * @param msg
+     * @return
+     */
+    public static ModelAndView errorIndex(Map<String, Object> map, String msg){
+        defaultAdd(map, msg, PRODUCT_INDEX_URL);
+        return new ModelAndView(ERROR_PAGE, map);
+    }
+
+    /**
+     * 添加修改 产品 成功方法
+     * @param map
+     * @param msg
+     * @return
+     */
+    public static ModelAndView successIndex(Map<String, Object> map, String msg){
+        /*成功返回到列表页*/
+        defaultAdd(map, msg, PRODUCT_DEFAULT_URL);
+        return new ModelAndView(SUCCESS_PAGE, map);
     }
 
 }

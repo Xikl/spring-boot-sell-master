@@ -1,24 +1,24 @@
 package com.ximo.springbootsellmaster.controller.seller;
 
-import com.lly835.bestpay.rest.type.Get;
 import com.ximo.springbootsellmaster.domain.ProductCategory;
 import com.ximo.springbootsellmaster.domain.ProductInfo;
 import com.ximo.springbootsellmaster.enums.ResultEnums;
 import com.ximo.springbootsellmaster.exception.SellException;
+import com.ximo.springbootsellmaster.form.ProductForm;
 import com.ximo.springbootsellmaster.service.ProductCategoryService;
 import com.ximo.springbootsellmaster.service.ProductInfoService;
 import com.ximo.springbootsellmaster.util.ModelUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -101,5 +101,29 @@ public class SellerProductController {
         map.put("categoryList", categoryList);
         return new ModelAndView("product/index", map);
     }
+
+    @PostMapping("/save")
+    public ModelAndView save(@Valid ProductForm productForm,
+                             BindingResult bindingResult,
+                             Map<String, Object> map){
+        if(bindingResult.hasErrors()){
+            return ModelUtil.errorIndex(map, bindingResult.getFieldError().getDefaultMessage());
+        }
+
+        try {
+            /*信息正确，bean的拷贝*/
+            //todo 新增的情况怎么办
+            ProductInfo productInfo = productInfoService.findOne(productForm.getProductId());
+            BeanUtils.copyProperties(productForm, productInfo);
+            /*保存*/
+            productInfoService.save(productInfo);
+        } catch (SellException e) {
+            return ModelUtil.errorIndex(map, e.getMessage());
+        }
+        return ModelUtil.successIndex(map, ResultEnums.PRODUCT_SAVE_SUCCESS.getMsg());
+    }
+
+
+
 
 }
