@@ -1,20 +1,25 @@
 package com.ximo.springbootsellmaster.controller.seller;
 
+import com.lly835.bestpay.rest.type.Get;
+import com.ximo.springbootsellmaster.domain.ProductCategory;
 import com.ximo.springbootsellmaster.domain.ProductInfo;
 import com.ximo.springbootsellmaster.enums.ResultEnums;
 import com.ximo.springbootsellmaster.exception.SellException;
+import com.ximo.springbootsellmaster.service.ProductCategoryService;
 import com.ximo.springbootsellmaster.service.ProductInfoService;
 import com.ximo.springbootsellmaster.util.ModelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +34,8 @@ public class SellerProductController {
     @Autowired
     private ProductInfoService productInfoService;
 
+    @Autowired
+    private ProductCategoryService productCategoryService;
     /**
      * 商品列表页
      * @param page
@@ -79,6 +86,20 @@ public class SellerProductController {
         }
         /*成功的时候*/
         return ModelUtil.success(map, ResultEnums.PRODUCT_OFF_SALE_SUCCESS.getMsg());
+    }
+
+    @GetMapping("/index")
+    public ModelAndView index(@RequestParam(value = "productId", required = false) String productId,
+                      Map<String, Object> map){
+        if(!StringUtils.isEmpty(productId)){
+            ProductInfo productInfo = productInfoService.findOne(productId);
+            map.put("productInfo", productInfo);
+        }
+
+        /*查询所有的类目*/
+        List<ProductCategory> categoryList = productCategoryService.findAll();
+        map.put("categoryList", categoryList);
+        return new ModelAndView("product/index", map);
     }
 
 }

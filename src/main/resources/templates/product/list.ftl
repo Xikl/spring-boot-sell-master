@@ -78,7 +78,7 @@
                                 ${productInfo.updateTime}
                                 </td>
                                 <td>
-                                    <a href="/sell/seller/product/index/${productInfo.productId}" type="button"
+                                    <a href="/sell/seller/product/index?productId=${productInfo.productId}" type="button"
                                        class="btn btn-xs btn-success">修改</a>
                                 </td>
                                 <td>
