@@ -10,7 +10,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SellerInfoRepository extends JpaRepository<SellerInfo, String>{
 
-    /** 通过openid 查找*/
+    /**
+     * 通过openid 查找 sellerInfo
+     * @param openid
+     * @return
+     */
     SellerInfo findByOpenid(String openid);
 
 }
