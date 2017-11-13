@@ -29,6 +29,7 @@ public enum ResultEnums {
     PRODUCT_ON_SALE_SUCCESS(24, "商品上架成功"),
     PRODUCT_OFF_SALE_SUCCESS(25, "商品下架成功"),
     PRODUCT_SAVE_SUCCESS(26, "商品保存成功"),
+    CATEGORY_SAVE_SUCCESS(27, "类目保存成功"),
     ;
 
     private Integer code;
