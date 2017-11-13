@@ -74,3 +74,13 @@ CREATE TABLE `order_detail` (
   KEY `idx_order_id` (`order_id`) /*订单id为索引*/
 
 )COMMENT '订单详情表';
+
+CREATE TABLE `seller_info`(
+  `seller_id`  VARCHAR(32) NOT NULL ,
+  `username` VARCHAR(32) NOT NULL ,
+  `password` VARCHAR(32) NOT NULL ,
+  `openid` VARCHAR(64) NOT NULL COMMENT '微信openid',
+  `create_time` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_time` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '修改时间',
+  PRIMARY KEY (`seller_id`)
+)COMMENT '卖家信息表'
