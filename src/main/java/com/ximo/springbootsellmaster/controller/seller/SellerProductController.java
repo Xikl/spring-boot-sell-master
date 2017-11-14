@@ -64,10 +64,10 @@ public class SellerProductController {
             productInfoService.onSale(productId);
         } catch (SellException e) {
             /*失败的时候*/
-            return ModelUtil.error(map, e.getMessage());
+            return ModelUtil.error(map, e.getMessage(), ModelUtil.PRODUCT_DEFAULT_URL);
         }
         /*成功的时候*/
-        return ModelUtil.success(map, ResultEnums.PRODUCT_ON_SALE_SUCCESS.getMsg());
+        return ModelUtil.success(map, ResultEnums.PRODUCT_ON_SALE_SUCCESS.getMsg(), ModelUtil.PRODUCT_DEFAULT_URL);
     }
 
     /**
@@ -83,10 +83,10 @@ public class SellerProductController {
             productInfoService.offSale(productId);
         } catch (SellException e) {
             /*失败的时候*/
-           return ModelUtil.error(map, e.getMessage());
+           return ModelUtil.error(map, e.getMessage(), ModelUtil.PRODUCT_DEFAULT_URL);
         }
         /*成功的时候*/
-        return ModelUtil.success(map, ResultEnums.PRODUCT_OFF_SALE_SUCCESS.getMsg());
+        return ModelUtil.success(map, ResultEnums.PRODUCT_OFF_SALE_SUCCESS.getMsg(), ModelUtil.PRODUCT_DEFAULT_URL);
     }
 
     @GetMapping("/index")
@@ -108,7 +108,7 @@ public class SellerProductController {
                              BindingResult bindingResult,
                              Map<String, Object> map){
         if(bindingResult.hasErrors()){
-            return ModelUtil.errorIndex(map, bindingResult.getFieldError().getDefaultMessage());
+            return ModelUtil.error(map, bindingResult.getFieldError().getDefaultMessage(), ModelUtil.PRODUCT_INDEX_URL);
         }
 
         ProductInfo productInfo;
@@ -127,9 +127,9 @@ public class SellerProductController {
             /*保存*/
             productInfoService.save(productInfo);
         } catch (SellException e) {
-            return ModelUtil.errorIndex(map, e.getMessage());
+            return ModelUtil.error(map, e.getMessage(), ModelUtil.PRODUCT_INDEX_URL);
         }
-        return ModelUtil.successIndex(map, ResultEnums.PRODUCT_SAVE_SUCCESS.getMsg());
+        return ModelUtil.success(map, ResultEnums.PRODUCT_SAVE_SUCCESS.getMsg(), ModelUtil.PRODUCT_DEFAULT_URL);
     }
 
 

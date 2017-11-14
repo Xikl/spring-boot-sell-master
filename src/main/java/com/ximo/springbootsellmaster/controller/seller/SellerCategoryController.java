@@ -69,7 +69,7 @@ public class SellerCategoryController {
                              BindingResult bindingResult,
                              Map<String, Object> map){
         if (bindingResult.hasErrors()){
-            return ModelUtil.errorIndexCtgy(map, bindingResult.getFieldError().getDefaultMessage());
+            return ModelUtil.error(map, bindingResult.getFieldError().getDefaultMessage(), ModelUtil.CATEGORY_INDEX_URL);
         }
 
         ProductCategory productCategory;
@@ -87,10 +87,10 @@ public class SellerCategoryController {
             /*保存*/
             productCategoryService.save(productCategory);
         } catch (SellException e) {
-            return ModelUtil.errorIndexCtgy(map, e.getMessage());
+            return ModelUtil.error(map, e.getMessage(), ModelUtil.CATEGORY_INDEX_URL);
         }
         /*成功*/
-        return ModelUtil.successIndexCtgy(map, ResultEnums.CATEGORY_SAVE_SUCCESS.getMsg());
+        return ModelUtil.success(map, ResultEnums.CATEGORY_SAVE_SUCCESS.getMsg(), ModelUtil.CATEGORY_DEFAULT_URL);
     }
 
 

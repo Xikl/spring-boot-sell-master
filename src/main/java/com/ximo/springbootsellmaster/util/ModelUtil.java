@@ -13,11 +13,12 @@ import java.util.Map;
  */
 public class ModelUtil{
 
-    private static final String ORDER_DEFAULT_URL = "/sell/seller/order/list";
-    private static final String PRODUCT_DEFAULT_URL = "/sell/seller/product/list";
-    private static final String PRODUCT_INDEX_URL = "/sell/seller/product/index";
-    private static final String CATEGORY_INDEX_URL = "/sell/seller/category/index";
-    private static final String CATEGORY_DEFAULT_URL = "/sell/seller/category/list";
+    public static final String ORDER_DEFAULT_URL = "/sell/seller/order/list";
+    public static final String PRODUCT_DEFAULT_URL = "/sell/seller/product/list";
+    public static final String PRODUCT_INDEX_URL = "/sell/seller/product/index";
+    public static final String CATEGORY_INDEX_URL = "/sell/seller/category/index";
+    public static final String CATEGORY_DEFAULT_URL = "/sell/seller/category/list";
+
     private static final String ERROR_PAGE = "common/error";
     private static final String SUCCESS_PAGE = "common/success";
 
@@ -68,8 +69,8 @@ public class ModelUtil{
      * @param msg
      * @return
      */
-    public static ModelAndView success(Map<String, Object> map, String msg){
-        defaultAdd(map, msg, PRODUCT_DEFAULT_URL);
+    public static ModelAndView success(Map<String, Object> map, String msg, String url){
+        defaultAdd(map, msg, url);
         return new ModelAndView(SUCCESS_PAGE, map);
     }
 
@@ -79,47 +80,9 @@ public class ModelUtil{
      * @param msg
      * @return
      */
-    public static ModelAndView error(Map<String, Object> map, String msg){
-        defaultAdd(map, msg, PRODUCT_DEFAULT_URL);
+    public static ModelAndView error(Map<String, Object> map, String msg, String url){
+        defaultAdd(map, msg, url);
         return new ModelAndView(ERROR_PAGE, map);
     }
 
-    /**
-     * 添加修改 产品 失败方法
-     * @param map
-     * @param msg
-     * @return
-     */
-    public static ModelAndView errorIndex(Map<String, Object> map, String msg){
-        defaultAdd(map, msg, PRODUCT_INDEX_URL);
-        return new ModelAndView(ERROR_PAGE, map);
-    }
-
-    /**
-     * 添加修改 产品 成功方法
-     * @param map
-     * @param msg
-     * @return
-     */
-    public static ModelAndView successIndex(Map<String, Object> map, String msg){
-        /*成功返回到列表页*/
-        defaultAdd(map, msg, PRODUCT_DEFAULT_URL);
-        return new ModelAndView(SUCCESS_PAGE, map);
-    }
-
-    /**
-     * 类目修改错误
-     * @param map
-     * @param msg
-     * @return
-     */
-    public static ModelAndView errorIndexCtgy(Map<String, Object> map, String msg){
-        defaultAdd(map, msg, CATEGORY_INDEX_URL);
-        return new ModelAndView(ERROR_PAGE, map);
-    }
-
-    public static ModelAndView successIndexCtgy(Map<String, Object> map, String msg){
-        defaultAdd(map, msg, CATEGORY_DEFAULT_URL);
-        return new ModelAndView(SUCCESS_PAGE, map);
-    }
 }
