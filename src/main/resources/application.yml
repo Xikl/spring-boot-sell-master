@@ -29,3 +29,8 @@ server:
 wechat:
   mpAppId: wxc344e6a900cc0222
   mpAppSecret: 3d43abf6e2ddb59f51620faf7bc1798d
+
+projectUrl:
+  weChatMpAuthorize: http://sell-sell.natapp1.cc
+  weChatOpenAuthorize: http://sell-sell.natapp1.cc
+  sell: http://sell-sell.natapp1.cc

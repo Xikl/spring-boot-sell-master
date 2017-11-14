@@ -1,5 +1,6 @@
 package com.ximo.springbootsellmaster.controller;
 
+import com.ximo.springbootsellmaster.config.ProjectUrlConfig;
 import com.ximo.springbootsellmaster.enums.ResultEnums;
 import com.ximo.springbootsellmaster.exception.SellException;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +33,13 @@ public class WeChatController {
     @Autowired
     private WxMpService wxOpenService;
 
+    @Autowired
+    private ProjectUrlConfig projectUrlConfig;
+
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
         //调用方法
-        String url = "http://sell-sell.natapp1.cc/sell/wechat/userInfo";
+        String url = projectUrlConfig.getWeChatMpAuthorize()+"/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url,
                 WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code， redirectUrl={}", redirectUrl);
@@ -63,7 +67,7 @@ public class WeChatController {
      */
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(@RequestParam("returnUrl") String returnUrl){
-        String url = "http://sell-sell.natapp1.cc/sell/wechat/qrUserInfo";
+        String url = projectUrlConfig.getWeChatOpenAuthorize()+"/sell/wechat/qrUserInfo";
         String redirectUrl = wxOpenService.buildQrConnectUrl(url,
                 WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN, URLEncoder.encode(returnUrl));
         return "redirect:" + redirectUrl;
