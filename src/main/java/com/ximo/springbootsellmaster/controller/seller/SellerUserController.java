@@ -5,6 +5,7 @@ import com.ximo.springbootsellmaster.enums.ResultEnums;
 import com.ximo.springbootsellmaster.service.SellerService;
 import com.ximo.springbootsellmaster.util.ModelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,10 @@ public class SellerUserController {
     @Autowired
     private SellerService sellerService;
 
+    /** 注入 string 操作的 类*/
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @GetMapping("/login")
     public ModelAndView login(@RequestParam("openid") String openid,
                               Map<String, Object> map){
@@ -33,7 +38,7 @@ public class SellerUserController {
             return ModelUtil.error(map, ResultEnums.LOGIN_FAIL.getMsg(), ModelUtil.ORDER_DEFAULT_URL);
         }
         //2.设置token到redis
-
+        stringRedisTemplate.opsForValue().set("abc", "asdfgh");
         //3.设置token到cookie
         return null;
     }
