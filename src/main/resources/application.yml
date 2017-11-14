@@ -14,6 +14,10 @@ spring:
     default-property-inclusion: non_null
   freemarker:
     suffix: .ftl
+  redis:
+    host: localhost
+    port: 6379
+    password:
 # 将freemarker的后缀改为 .html
 #    # 自动
 #    hibernate:
@@ -33,4 +37,4 @@ wechat:
 projectUrl:
   weChatMpAuthorize: http://sell-sell.natapp1.cc
   weChatOpenAuthorize: http://sell-sell.natapp1.cc
-  sell: http://sell-sell.natapp1.cc
+  sell: http://localhost:8080
