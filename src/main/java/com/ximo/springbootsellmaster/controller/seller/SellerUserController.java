@@ -69,7 +69,7 @@ public class SellerUserController {
 
     @GetMapping("/logout")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, Map<String, Object> map){
-        //从redis 中查询
+        //从cookie 中查询
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
         if (cookie != null){
             //2 清除redis
