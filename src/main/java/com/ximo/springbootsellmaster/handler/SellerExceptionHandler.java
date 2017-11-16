@@ -26,12 +26,29 @@ public class SellerExceptionHandler {
      */
     @ExceptionHandler(SellerAuthorizeException.class)
     public ModelAndView handlerSellerAuthorizeException(){
+        return myTest();
+    }
+
+    /**
+     * 实际的一个生产环境中的用的url跳转
+     * @return
+     */
+    private ModelAndView pro(){
         return new ModelAndView("redirect:"
                 .concat(projectUrlConfig.getWeChatOpenAuthorize())
                 .concat("/sell/wechat/qrAuthorize")
                 .concat("?returnUrl=")
                 .concat(projectUrlConfig.getSell())
                 .concat("/sell/seller/login"));
+    }
+
+    /**
+     * 自己的一个测试方法
+     * @return
+     */
+    private ModelAndView myTest(){
+        return new ModelAndView("redirect:"
+                .concat("localhost:8080/sell/seller/login?openid=oc8RZ0Wc_rt6kUd14IkKsw6UsbsA"));
     }
 
 }
