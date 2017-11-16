@@ -14,6 +14,7 @@ import com.ximo.springbootsellmaster.repository.OrderDetailRepository;
 import com.ximo.springbootsellmaster.repository.OrderMasterRepository;
 import com.ximo.springbootsellmaster.service.OrderService;
 import com.ximo.springbootsellmaster.service.ProductInfoService;
+import com.ximo.springbootsellmaster.service.PushMessageService;
 import com.ximo.springbootsellmaster.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -46,6 +47,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PushMessageService pushMessageService;
 
     /**
      * 创建订单
@@ -219,6 +223,8 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】 更新失败", orderMaster);
             throw new SellException(ResultEnums.ORDER_UPDATE_FAIL);
         }
+        /*推送微信模板消息*/
+        pushMessageService.orderStatus(orderDTO);
         //orderDTO
         return orderDTO;
     }

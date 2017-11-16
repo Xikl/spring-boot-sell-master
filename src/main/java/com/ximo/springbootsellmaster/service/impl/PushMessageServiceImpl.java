@@ -55,6 +55,7 @@ public class PushMessageServiceImpl implements PushMessageService{
         );
         wxMpTemplateMessage.setData(data);
 
+        /*此异常应该被捕获， 不应该被抛出 因为 此错误 和别的相比业务相比 不是那么重要*/
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(wxMpTemplateMessage);
         } catch (WxErrorException e) {
