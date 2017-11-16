@@ -35,6 +35,8 @@ wechat:
   mpAppSecret: 3d43abf6e2ddb59f51620faf7bc1798d
   openAppId: wxc344e6a900cc0222
   openAppSecret: 3d43abf6e2ddb59f51620faf7bc1798d
+  templateId:
+    orderStatus: m8KKv7vc48u2TPm5jTBRISboFY4nDt4CWfNjCoovFNI
 
 projectUrl:
   weChatMpAuthorize: http://sell-sell.natapp1.cc

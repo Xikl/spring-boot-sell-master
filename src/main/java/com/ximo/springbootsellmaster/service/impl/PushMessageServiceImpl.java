@@ -1,5 +1,6 @@
 package com.ximo.springbootsellmaster.service.impl;
 
+import com.ximo.springbootsellmaster.config.WeChatAccountConfig;
 import com.ximo.springbootsellmaster.dto.OrderDTO;
 import com.ximo.springbootsellmaster.service.PushMessageService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,10 @@ public class PushMessageServiceImpl implements PushMessageService{
     @Autowired
     private WxMpService wxMpService;
 
+    /** 配置 配置文件中的信息 */
+    @Autowired
+    private WeChatAccountConfig weChatAccountConfig;
+
     /**
      * 订单状态变更消息
      *
@@ -35,9 +40,9 @@ public class PushMessageServiceImpl implements PushMessageService{
     public void orderStatus(OrderDTO orderDTO) {
         WxMpTemplateMessage wxMpTemplateMessage = new WxMpTemplateMessage();
         /*模板id*/
-        wxMpTemplateMessage.setTemplateId("m8KKv7vc48u2TPm5jTBRISboFY4nDt4CWfNjCoovFNI");
+        wxMpTemplateMessage.setTemplateId(weChatAccountConfig.getTemplateId().get("orderStatus"));
         /*接受者的id*/
-        wxMpTemplateMessage.setToUser("oc8RZ0Wc_rt6kUd14IkKsw6UsbsA");
+        wxMpTemplateMessage.setToUser(orderDTO.getBuyerOpenid());
 
         List<WxMpTemplateData> data = Arrays.asList(
                 new WxMpTemplateData("first", "亲，记得收货"),

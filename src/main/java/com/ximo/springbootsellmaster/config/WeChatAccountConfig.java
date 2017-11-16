@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 /**
  * 读取配置文件类获得两个属性
  * Created by 朱文赵
@@ -35,4 +37,6 @@ public class WeChatAccountConfig {
     /** 商户证书路径*/
     private String mchPath;
 
+    /** 微信消息模板id 定义为map 用的时候可以直接 get("属性")*/
+    private Map<String, String> templateId;
 }
