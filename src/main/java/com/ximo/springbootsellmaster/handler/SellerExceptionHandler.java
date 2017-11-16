@@ -43,12 +43,13 @@ public class SellerExceptionHandler {
     }
 
     /**
+     * http://localhost:8080/sell/seller/order/list
      * 自己的一个测试方法
      * @return
      */
     private ModelAndView myTest(){
         return new ModelAndView("redirect:"
-                .concat("localhost:8080/sell/seller/login?openid=oc8RZ0Wc_rt6kUd14IkKsw6UsbsA"));
+                .concat("http://localhost:8080/sell/seller/login?openid=oc8RZ0Wc_rt6kUd14IkKsw6UsbsA"));
     }
 
 }

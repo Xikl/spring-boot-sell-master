@@ -133,7 +133,7 @@
 <script>
     var websocket = null;
     if("WebSocket" in window){
-        websocket = new WebSocket("ws://localhost:8080/webSocket");
+        websocket = new WebSocket("ws://localhost:8080/sell/webSocket");
     }else{
         alter('你的浏览器不支持websocket')
     }
@@ -145,7 +145,6 @@
 
     websocket.onclose = function (event) {
         console.log("关闭连接");
-
     };
     
     websocket.onmessage = function (event) {
@@ -158,7 +157,7 @@
         alert("通信发生错误");
     };
 
-    websocket.onbeforeunload = function () {
+    window.onbeforeunload = function () {
         websocket.close();
     }
 </script>
