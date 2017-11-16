@@ -51,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private PushMessageService pushMessageService;
 
+    @Autowired
+    private WebSocket webSocket;
+
     /**
      * 创建订单
      *
@@ -103,6 +106,9 @@ public class OrderServiceImpl implements OrderService {
                 new CartDTO(e.getProductId(), e.getProductQuantity())
         ).collect(Collectors.toList());
         productInfoService.decreaseStock(cartDTOList);
+
+        /*推送消息*/
+        webSocket.sendMessage("有新的订单");
         return orderDTO;
     }
 

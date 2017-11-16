@@ -132,34 +132,33 @@
     </div>
 <script>
     var websocket = null;
-    if("WebSocket" in window){
-        websocket = new WebSocket("ws://localhost:8080/sell/webSocket");
-    }else{
-        alter('你的浏览器不支持websocket')
+
+    if('WebSocket' in window) {
+        websocket = new WebSocket('ws://localhost:8080/sell/webSocket');
+    }else {
+        alert('该浏览器不支持websocket!');
     }
 
     websocket.onopen = function (event) {
-        console.log("建立连接");
-
+        console.log('建立连接');
     };
 
     websocket.onclose = function (event) {
-        console.log("关闭连接");
+        console.log('连接关闭');
     };
-    
+
     websocket.onmessage = function (event) {
-        console.log("收到消息" + event.data);
+        console.log('收到消息:' + event.data)
         /*播放音乐 或者别的*/
     };
 
-    websocket.onerror = function (event) {
-        console.log("通信发生错误");
-        alert("通信发生错误");
+    websocket.onerror = function () {
+        alert('websocket通信发生错误！');
     };
 
     window.onbeforeunload = function () {
         websocket.close();
-    }
+    };
 </script>
 </body>
 </html>

@@ -26,7 +26,9 @@ public class WebSocket {
     /** 与某个客户端的连接会话，需要通过它来给客户端发送数据*/
     private Session session;
 
-    private CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<>();
+    /** static 生命周期为 创建实例为的时候 就创建对象 */
+    private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<>();
+
 
     @OnOpen
     public void onOpen(Session session){
