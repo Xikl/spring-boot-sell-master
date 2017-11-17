@@ -1,5 +1,6 @@
 package com.ximo.springbootsellmaster.util;
 
+import com.ximo.springbootsellmaster.enums.ResultEnums;
 import com.ximo.springbootsellmaster.vo.ResultVO;
 
 /**
@@ -34,6 +35,15 @@ public class ResultVOUtil {
      */
     public static ResultVO error(Integer code, String msg){
         return new ResultVO(code, msg, null);
+    }
+
+    /**
+     * 错误时的方法
+     * @param resultEnums
+     * @return
+     */
+    public static ResultVO error(ResultEnums resultEnums){
+        return new ResultVO(resultEnums.getCode(), resultEnums.getMsg(), null);
     }
 
 

@@ -1,10 +1,15 @@
 package com.ximo.springbootsellmaster.handler;
 
 import com.ximo.springbootsellmaster.config.ProjectUrlConfig;
+import com.ximo.springbootsellmaster.enums.ResultEnums;
+import com.ximo.springbootsellmaster.exception.SellException;
 import com.ximo.springbootsellmaster.exception.SellerAuthorizeException;
+import com.ximo.springbootsellmaster.util.ResultVOUtil;
+import com.ximo.springbootsellmaster.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,7 +30,7 @@ public class SellerExceptionHandler {
      * @return
      */
     @ExceptionHandler(SellerAuthorizeException.class)
-    public ModelAndView handlerSellerAuthorizeException(){
+    public ModelAndView handleSellerAuthorizeException(){
         return myTest();
     }
 
@@ -50,6 +55,25 @@ public class SellerExceptionHandler {
     private ModelAndView myTest(){
         return new ModelAndView("redirect:"
                 .concat("http://localhost:8080/sell/seller/login?openid=oc8RZ0Wc_rt6kUd14IkKsw6UsbsA"));
+    }
+
+    /**
+     * 处理SellException异常
+     */
+    @ExceptionHandler(SellException.class)
+    @ResponseBody
+    public ResultVO handleSellException(SellException e){
+        return ResultVOUtil.error(e.getCode(), e.getMessage());
+    }
+
+    /**
+     * 内部错误
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public ResultVO handleException(){
+        return ResultVOUtil.error(ResultEnums.INNER_ERROR);
     }
 
 }
