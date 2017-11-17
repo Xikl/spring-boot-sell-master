@@ -131,8 +131,8 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="modal-container-84160" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <#--新增订单模态框 -->
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -145,15 +145,22 @@
                     你有新的订单.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <#--点击关闭 暂停音乐-->
+                    <button onclick="javascript:document.getElementById('notice').pause();"
+                            type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button onclick="location.reload()" type="button" class="btn btn-primary">查看新的订单</button>
                 </div>
             </div>
-
         </div>
-
     </div>
 
+    <audio id="notice" loop="loop">
+        <source src="/sell/mp3/song.mp3" type="audio/mpeg"/>
+    </audio>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <#--bootstrap js-->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
     var websocket = null;
 
@@ -174,7 +181,8 @@
     websocket.onmessage = function (event) {
         console.log('收到消息:' + event.data)
         /*播放音乐 或者别的*/
-
+        $('#myModal').modal('show')
+        document.getElementById('notice').play();
     };
 
     websocket.onerror = function () {

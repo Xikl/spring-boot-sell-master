@@ -42,7 +42,7 @@ public class SellerOrderController {
                        @RequestParam(value = "size", defaultValue = "10") Integer size,
                        Model model) {
         /*排序 降序*/
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         PageRequest pageRequest = new PageRequest(page - 1, size, sort);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
         model.addAttribute("orderDTOPage", orderDTOPage);
