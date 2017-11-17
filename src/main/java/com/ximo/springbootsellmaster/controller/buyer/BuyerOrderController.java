@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -79,7 +80,8 @@ public class BuyerOrderController {
             log.error("【查询订单错误】 openid为空");
             throw new SellException(ResultEnums.PARAM_ERROR);
         }
-        PageRequest pageRequest = new PageRequest(page, size);
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        PageRequest pageRequest = new PageRequest(page, size, sort);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, pageRequest);
 
         return ResultVOUtil.success(orderDTOPage.getContent());

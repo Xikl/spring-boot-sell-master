@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,9 @@ public class SellerOrderController {
     public String list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                        @RequestParam(value = "size", defaultValue = "10") Integer size,
                        Model model) {
-        PageRequest pageRequest = new PageRequest(page - 1, size);
+        /*排序 降序*/
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        PageRequest pageRequest = new PageRequest(page - 1, size, sort);
         Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
         model.addAttribute("orderDTOPage", orderDTOPage);
         model.addAttribute("currentPage", page);
