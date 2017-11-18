@@ -42,7 +42,10 @@ projectUrl:
   weChatMpAuthorize: http://sell-sell.natapp1.cc
   weChatOpenAuthorize: http://sell-sell.natapp1.cc
   sell: http://localhost:8080
+# http://sell-sell.natapp1.cc
+#打印mybatis中sql语句
 logging:
   level:
     com.ximo.springbootsellmaster.domain.mapper: trace
-# http://sell-sell.natapp1.cc
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

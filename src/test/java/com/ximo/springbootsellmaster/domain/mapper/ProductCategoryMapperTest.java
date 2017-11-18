@@ -86,4 +86,11 @@ public class ProductCategoryMapperTest {
         System.out.println(result);
         Assert.assertEquals(1, result);
     }
+
+    @Test
+    public void selectByCategoryType() throws Exception{
+        ProductCategory result = mapper.selectByCategoryType(4);
+        System.out.println(result);
+        Assert.assertNotNull(result);
+    }
 }
