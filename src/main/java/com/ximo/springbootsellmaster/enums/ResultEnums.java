@@ -34,6 +34,7 @@ public enum ResultEnums {
     CATEGORY_SAVE_SUCCESS(27, "类目保存成功"),
     LOGIN_FAIL(28, "登录失败,登录信息不正确"),
     LOGIN_SUCCESS(29, "登出成功"),
+    SECKILL_ERROR(30, "哎呦喂，人也太多了，请换个姿势试试看"),
     ;
 
     private Integer code;
