@@ -42,4 +42,7 @@ projectUrl:
   weChatMpAuthorize: http://sell-sell.natapp1.cc
   weChatOpenAuthorize: http://sell-sell.natapp1.cc
   sell: http://localhost:8080
+logging:
+  level:
+    com.ximo.springbootsellmaster.domain.mapper: trace
 # http://sell-sell.natapp1.cc
