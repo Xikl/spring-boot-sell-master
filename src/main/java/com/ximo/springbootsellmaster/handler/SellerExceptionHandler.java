@@ -6,6 +6,7 @@ import com.ximo.springbootsellmaster.exception.SellException;
 import com.ximo.springbootsellmaster.exception.SellerAuthorizeException;
 import com.ximo.springbootsellmaster.util.ResultVOUtil;
 import com.ximo.springbootsellmaster.vo.ResultVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @date: 2017/11/15
  */
 @ControllerAdvice
+@Slf4j
 public class SellerExceptionHandler {
 
     @Autowired
@@ -72,7 +74,8 @@ public class SellerExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ResultVO handleException(){
+    public ResultVO handleException(Exception e){
+        log.error("【未捕获异常】，不想扣工资，就快改. e={}", e);
         return ResultVOUtil.error(ResultEnums.INNER_ERROR);
     }
 

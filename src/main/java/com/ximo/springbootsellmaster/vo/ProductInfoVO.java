@@ -3,6 +3,7 @@ package com.ximo.springbootsellmaster.vo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +12,9 @@ import java.math.BigDecimal;
  * 2017/9/9
  */
 @Data
-public class ProductInfoVO {
+public class ProductInfoVO implements Serializable {
+
+    private static final long serialVersionUID = -5488070972183326126L;
 
     @JsonProperty("id")
 //    @SerializedName("id")
