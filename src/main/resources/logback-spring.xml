@@ -17,7 +17,7 @@
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <onMatch>DENY</onMatch>
-            <onMismatch>ACCESS</onMismatch>
+            <onMismatch>ACCEPT</onMismatch>
         </filter>
         <encoder>
             <!--输出格式-->
