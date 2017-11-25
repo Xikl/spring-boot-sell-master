@@ -39,9 +39,9 @@ public class OrderDetail {
     /** 商品图片*/
     private String productIcon;
 
-//    /** 创建时间*/
-//    private Date createTime;
-//
-//    /** 更新时间*/
-//    private Date updateTime;
+    /** 创建时间*/
+    private Date createTime;
+
+    /** 更新时间*/
+    private Date updateTime;
 }
