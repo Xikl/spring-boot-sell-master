@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.ximo.springbootsellmaster.constant.SeckillConstant.TIME_OUT;
+
 /**
  * ProductInfoService实现类
  * Created by 朱文赵
@@ -25,6 +27,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Autowired
     private ProductInfoRepository productInfoRepository;
+
+    @Autowired
+    private RedisLock redisLock;
 
     @Override
     public ProductInfo findOne(String productId) {
@@ -78,7 +83,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
      * @param cartDTOList 购物车
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = SellException.class)
     public void decreaseStock(List<CartDTO> cartDTOList) {
         for (CartDTO cartDTO : cartDTOList){
             ProductInfo productInfo = productInfoRepository.findOne(cartDTO.getProductId());
@@ -86,7 +91,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
                 //商品不存在
                 throw new SellException(ResultEnums.PRODUCT_NOT_EXIST);
             }
-
+            /*加redis的锁*/
+            long time = System.currentTimeMillis() + TIME_OUT;
+            if (!redisLock.lock(productInfo.getProductId(), String.valueOf(time))){
+                throw new SellException(ResultEnums.SECKILL_ERROR);
+            }
             //减库存
             Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
             if (result < 0){
@@ -95,6 +104,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
             productInfo.setProductStock(result);
             productInfoRepository.save(productInfo);
+            /*redis 开锁*/
+            redisLock.unlock(productInfo.getProductId(), String.valueOf(time));
         }
     }
 

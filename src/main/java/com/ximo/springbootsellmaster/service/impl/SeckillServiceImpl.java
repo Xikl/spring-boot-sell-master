@@ -2,9 +2,10 @@ package com.ximo.springbootsellmaster.service.impl;
 
 import com.ximo.springbootsellmaster.enums.ResultEnums;
 import com.ximo.springbootsellmaster.exception.SellException;
-import com.ximo.springbootsellmaster.service.impl.RedisLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.ximo.springbootsellmaster.constant.SeckillConstant.TIME_OUT;
 
 /**
  * @description: 假装自己有秒杀的类
@@ -13,9 +14,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SeckillServiceImpl {
-
-    /** 定义一个超时时间*/
-    private static final long TIME_OUT = 10 * 1000;
 
     @Autowired
     private RedisLock redisLock;
@@ -36,7 +34,6 @@ public class SeckillServiceImpl {
             e.printStackTrace();
         }
         redisLock.unlock(productId, String.valueOf(time));
-
     }
 
 
