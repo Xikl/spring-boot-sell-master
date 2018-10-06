@@ -2,7 +2,7 @@ spring:
   # 数据库配置
   datasource:
 #      url: jdbc:mysql://192.168.0.116:3306/sell?characterEncoding=utf-8&uesSSL=false
-      url: jdbc:mysql://localhost:3306/spring-boot-sell-master?characterEncoding=utf-8&uesSSL=false
+      url: jdbc:mysql://localhost:3306/spring-boot-sell-master?characterEncoding=utf-8&uSSL=false
       username: root
       password: zwz520
       driver-class-name: com.mysql.jdbc.Driver
